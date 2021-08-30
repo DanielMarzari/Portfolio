@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>SortandSearch.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Consolas}
+pre {color: #000000; background-color: #ffffff; font-family: Consolas}
+table {color: #000000; background-color: #e9e8e2; font-family: Consolas}
+.string {color: #ce7b00}
+.ST6 {color: #ce7b00; font-family: Consolas; font-weight: bold}
+.literal {color: #0000e6}
+.ST2 {color: #009900; font-family: Consolas; font-style: italic}
+.ST4 {font-family: Consolas; font-style: italic}
+.ST3 {font-family: Consolas; font-weight: bold; font-style: italic}
+.comment {color: #969696}
+.ST5 {color: #009900}
+.ST0 {color: #969696; font-family: Consolas; font-weight: bold}
+.ST1 {font-family: Consolas; font-weight: bold}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\Daniel\Documents\NetBeansProjects\Google_Projects\src\google_projects\SortandSearch.java</td></tr></table>
+<pre>
+  1 <span class="literal">package</span> google_projects;
+  2 
+  3 <span class="literal">import</span> java.util.Arrays;
+  4 
+  5 <span class="comment">/**</span>
+  6 <span class="comment"> * </span><span class="ST0">@author</span> <span class="comment">Daniel</span>
+  7 <span class="comment"> * </span><span class="comment">General</span> <span class="comment">Links</span><span class="comment">:</span>
+  8 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">stackabuse</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">sorting</span><span class="comment">-</span><span class="comment">algorithms</span><span class="comment">-</span><span class="comment">in</span><span class="comment">-</span><span class="comment">java</span><span class="comment">/</span>
+  9 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">gist</span><span class="comment">.</span><span class="comment">github</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">djitz</span><span class="comment">/2152957</span>
+ 10 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">stackoverflow</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">questions</span><span class="comment">/8938375/</span><span class="comment">an</span><span class="comment">-</span><span class="comment">intuitive</span><span class="comment">-</span><span class="comment">understanding</span><span class="comment">-</span><span class="comment">of</span><span class="comment">-</span><span class="comment">heapsort</span>
+ 11  <span class="comment">*/</span>
+ 12 <span class="literal">public</span> <span class="literal">class</span> <span class="ST1">SortandSearch</span> {
+ 13     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST2">arr</span>, <span class="ST2">testArr</span>;
+ 14     <span class="comment">/**</span>
+ 15 <span class="comment">     * </span><span class="ST0">@param</span> args <span class="comment">the</span> <span class="comment">command</span> <span class="comment">line</span> <span class="comment">arguments</span>
+ 16      <span class="comment">*/</span>
+ 17     <span class="literal">public</span> <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">main</span>(String[] args) {
+ 18         
+ 19         <span class="literal">double</span> currentTime, finishTime;
+ 20         
+ 21         <span class="literal">for</span>(<span class="literal">int</span> p = 1; p &lt; 6; p++){
+ 22             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Sort &amp; Search Trial </span><span class="string">&quot;</span> + (p) + <span class="string">&quot;</span><span class="string">:  </span><span class="string">&quot;</span> + (<span class="literal">int</span>) Math.<span class="ST4">pow</span>(10, p));
+ 23             
+ 24             <span class="ST2">arr</span> = <span class="literal">new</span> <span class="literal">int</span>[(<span class="literal">int</span>) Math.<span class="ST4">pow</span>(10, p)];
+ 25             
+ 26             <span class="literal">for</span>(<span class="literal">int</span> i = 0; i &lt; (<span class="literal">int</span>) Math.<span class="ST4">pow</span>(10, p); i++){
+ 27                 <span class="ST2">arr</span>[i] = (<span class="literal">int</span>) (Math.<span class="ST4">random</span>() * (<span class="literal">int</span>) Math.<span class="ST4">pow</span>(10, p));
+ 28             }
+ 29             
+ 30             
+ 31             <span class="comment">//Bubble Sort</span>
+ 32             currentTime = System.<span class="ST4">currentTimeMillis</span>();
+ 33             <span class="ST2">testArr</span> = <span class="ST2">arr</span>.clone();
+ 34             <span class="ST4">BubbleSort</span>(<span class="ST2">testArr</span>);
+ 35             finishTime = System.<span class="ST4">currentTimeMillis</span>();
+ 36             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Bubble Sort took </span><span class="string">&quot;</span> + (finishTime-currentTime) + <span class="string">&quot;</span><span class="string"> ms</span><span class="string">&quot;</span>);
+ 37 
+ 38             <span class="literal">if</span>(p == 1){<span class="comment">//proof of sort</span>
+ 39                 System.<span class="ST2">out</span>.println(Arrays.<span class="ST4">toString</span>(<span class="ST2">testArr</span>));
+ 40             }
+ 41             
+ 42             
+ 43             <span class="comment">//Merge Sort</span>
+ 44             currentTime = System.<span class="ST4">currentTimeMillis</span>();
+ 45             <span class="ST2">testArr</span> = <span class="ST2">arr</span>.clone();
+ 46             <span class="ST4">MergeSort</span>(<span class="ST2">testArr</span>);
+ 47             finishTime = System.<span class="ST4">currentTimeMillis</span>();
+ 48             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Merge Sort took </span><span class="string">&quot;</span> + (finishTime-currentTime) + <span class="string">&quot;</span><span class="string"> ms</span><span class="string">&quot;</span>);
+ 49 
+ 50             <span class="literal">if</span>(p == 1){<span class="comment">//proof of sort</span>
+ 51                 System.<span class="ST2">out</span>.println(Arrays.<span class="ST4">toString</span>(<span class="ST2">testArr</span>));
+ 52             }
+ 53             
+ 54             
+ 55             <span class="comment">//Radix Sort</span>
+ 56             currentTime = System.<span class="ST4">currentTimeMillis</span>();
+ 57             <span class="ST2">testArr</span> = <span class="ST2">arr</span>.clone();
+ 58             <span class="ST4">radixSort</span>(<span class="ST2">testArr</span>, <span class="ST2">testArr</span>.<span class="ST5">length</span>);
+ 59             finishTime = System.<span class="ST4">currentTimeMillis</span>();
+ 60             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Radix Sort took </span><span class="string">&quot;</span> + (finishTime-currentTime) + <span class="string">&quot;</span><span class="string"> ms</span><span class="string">&quot;</span>);
+ 61             
+ 62             <span class="literal">if</span>(p == 1){<span class="comment">//proof of sort</span>
+ 63                 System.<span class="ST2">out</span>.println(Arrays.<span class="ST4">toString</span>(<span class="ST2">testArr</span>));
+ 64             }
+ 65             
+ 66             
+ 67             <span class="comment">//Linear Search</span>
+ 68             currentTime = System.<span class="ST4">currentTimeMillis</span>();
+ 69             <span class="ST4">linearSearch</span>(<span class="ST2">testArr</span>, 100);
+ 70             finishTime = System.<span class="ST4">currentTimeMillis</span>();
+ 71             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Linear Search took </span><span class="string">&quot;</span> + (finishTime-currentTime) + <span class="string">&quot;</span><span class="string"> ms</span><span class="string">&quot;</span>);
+ 72             
+ 73             
+ 74             <span class="comment">//Binary Search</span>
+ 75             currentTime = System.<span class="ST4">currentTimeMillis</span>();
+ 76             <span class="ST4">binarySearch</span>(<span class="ST2">testArr</span>, 100);
+ 77             finishTime = System.<span class="ST4">currentTimeMillis</span>();
+ 78             System.<span class="ST2">out</span>.println(<span class="string">&quot;</span><span class="string">Binary Search took </span><span class="string">&quot;</span> + (finishTime-currentTime) + <span class="string">&quot;</span><span class="string"> ms</span><span class="string">&quot;</span>);
+ 79             
+ 80             System.<span class="ST2">out</span>.print(<span class="string">&quot;</span><span class="ST6">\r</span><span class="ST6">\n</span><span class="string">&quot;</span>);
+ 81         }
+ 82         
+ 83     }
+ 84     
+ 85     <span class="literal">static</span> <span class="literal">int</span> <span class="ST3">binarySearch</span>(<span class="literal">int</span>[] arr, <span class="literal">int</span> value){
+ 86         <span class="literal">return</span> Arrays.<span class="ST4">binarySearch</span>(arr, value);
+ 87     }
+ 88     
+ 89     <span class="literal">static</span> <span class="literal">int</span> <span class="ST3">linearSearch</span>(<span class="literal">int</span>[] arr, <span class="literal">int</span> value){
+ 90         <span class="literal">for</span>(<span class="literal">int</span> i = 0; i&lt;arr.<span class="ST5">length</span>; i++){
+ 91             <span class="literal">if</span>(arr[i] == value){
+ 92                 <span class="literal">return</span> i;
+ 93             }
+ 94         }
+ 95         <span class="literal">return</span> -1;
+ 96     }
+ 97     
+ 98     <span class="comment">//Bubble Sort switches elements in an array (one after the next) </span>
+ 99     <span class="comment">//Time Complexity: O(n^2)</span>
+100     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">BubbleSort</span>(<span class="literal">int</span>[] arr){
+101         <span class="literal">boolean</span> isSorted = <span class="literal">false</span>;
+102         <span class="literal">int</span> temp;
+103         <span class="literal">while</span>(!isSorted){
+104             isSorted = <span class="literal">true</span>;
+105             <span class="literal">for</span>(<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span> - 1; i ++){
+106                 <span class="literal">if</span>(arr[i] &gt; arr[i+1]){
+107                     isSorted = <span class="literal">false</span>;
+108                     temp = arr[i];
+109                     arr[i] = arr[i+1];
+110                     arr[i+1] = temp;
+111                 }
+112             }
+113         }
+114         <span class="literal">return</span> arr;
+115     }
+116       
+117     <span class="comment">//Merge Sort makes a copy of the array and takes the lowest of each grouping to resort into the origional array. </span>
+118     <span class="comment">//recursively it sorts larger chunks each time until the whole array is sorted</span>
+119     <span class="comment">//Time Complexity: O(n log(n)) ???</span>
+120     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">MergeSort</span>(<span class="literal">int</span>[] arr){
+121         <span class="literal">return</span> <span class="ST4">MergeSort</span>(arr, 1);
+122     }
+123     
+124     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">MergeSort</span>(<span class="literal">int</span>[] arr, <span class="literal">int</span> len){
+125         <span class="literal">int</span>[] mirrorArr = arr.clone();
+126         <span class="literal">int</span> a = 0,b = len, indx = 0, upperA, upperB;
+127         <span class="literal">while</span>(a &lt;= arr.<span class="ST5">length</span> - 1 &amp;&amp; b &lt;= arr.<span class="ST5">length</span> - 1){
+128             upperA = b;
+129             upperB = (b + len &lt; arr.<span class="ST5">length</span>) ? b + len : arr.<span class="ST5">length</span>;
+130             <span class="literal">while</span>((a &lt; upperA) || (b &lt; upperB)){ 
+131                 <span class="literal">if</span>(a == upperA){
+132                     arr[indx++] = mirrorArr[b++];
+133                 }<span class="literal">else</span>{
+134                     <span class="literal">if</span>((b == upperB) || (b &gt;= mirrorArr.<span class="ST5">length</span>)){
+135                         arr[indx++] = mirrorArr[a++];
+136                     }<span class="literal">else</span>{
+137                         <span class="literal">if</span>(mirrorArr[a] &lt; mirrorArr[b]){
+138                             arr[indx++] = mirrorArr[a++];
+139                         }<span class="literal">else</span>{
+140                             arr[indx++] = mirrorArr[b++];
+141                         }
+142                     }
+143                 }
+144             }
+145             a+= len;
+146             b+= len;
+147         }
+148         <span class="literal">return</span> (len &gt; arr.<span class="ST5">length</span>) ? arr : <span class="ST4">MergeSort</span>(arr, len*2);
+149     }
+150     
+151     <span class="comment">// A utility function to get maximum value in arr[] </span>
+152     <span class="literal">static</span> <span class="literal">int</span> <span class="ST3">getMax</span>(<span class="literal">int</span> array[], <span class="literal">int</span> n) 
+153     { 
+154         <span class="literal">int</span> mx = <span class="ST2">arr</span>[0]; 
+155         <span class="literal">for</span> (<span class="literal">int</span> i = 1; i &lt; n; i++) 
+156             <span class="literal">if</span> (array[i] &gt; mx) 
+157                 mx = array[i]; 
+158         <span class="literal">return</span> mx; 
+159     } 
+160   
+161     <span class="comment">// A function to do counting sort of arr[] according to </span>
+162     <span class="comment">// the digit represented by exp. </span>
+163     <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">countSort</span>(<span class="literal">int</span> array[], <span class="literal">int</span> n, <span class="literal">int</span> exp) 
+164     { 
+165         <span class="literal">int</span> output[] = <span class="literal">new</span> <span class="literal">int</span>[n]; <span class="comment">// output array </span>
+166         <span class="literal">int</span> i; 
+167         <span class="literal">int</span> count[] = <span class="literal">new</span> <span class="literal">int</span>[10]; 
+168         Arrays.<span class="ST4">fill</span>(count,0); 
+169   
+170         <span class="comment">// Store count of occurrences in count[] </span>
+171         <span class="literal">for</span> (i = 0; i &lt; n; i++) 
+172             count[ (array[i]/exp)%10 ]++; 
+173   
+174         <span class="comment">// Change count[i] so that count[i] now contains actual position of this digit in output[] </span>
+175         <span class="literal">for</span> (i = 1; i &lt; 10; i++){ 
+176             count[i] += count[i - 1]; 
+177         }
+178         
+179         <span class="comment">// Build the output array </span>
+180         <span class="literal">for</span> (i = n - 1; i &gt;= 0; i--) { 
+181             output[count[ (array[i]/exp)%10 ] - 1] = array[i]; 
+182             count[ (array[i]/exp)%10 ]--; 
+183         } 
+184   
+185         <span class="comment">// Copy the output array to arr[], so that arr[] now </span>
+186         <span class="comment">// contains sorted numbers according to curent digit </span>
+187         <span class="literal">for</span> (i = 0; i &lt; n; i++) 
+188             array[i] = output[i]; 
+189     } 
+190   
+191     <span class="comment">// Radix Sort </span>
+192     <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">radixSort</span>(<span class="literal">int</span> array[], <span class="literal">int</span> n) 
+193     { 
+194         <span class="comment">// Find the maximum number to know number of digits </span>
+195         <span class="literal">int</span> m = <span class="ST4">getMax</span>(array, n);         
+196         <span class="comment">// Do counting sort for every digit. Instead of passing digit number, exp is passed. exp is 10^i where i is current digit number </span>
+197         <span class="literal">for</span> (<span class="literal">int</span> exp = 1; m/exp &gt; 0; exp *= 10) 
+198             <span class="ST4">countSort</span>(array, n, exp); 
+199     } 
+200   
+201 }
+202 
+</pre></body>
+</html>
