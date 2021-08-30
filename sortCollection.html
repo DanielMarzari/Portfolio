@@ -1,0 +1,393 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>sortCollection.java</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {color: #000000; background-color: #ffffff; font-family: Consolas}
+pre {color: #000000; background-color: #ffffff; font-family: Consolas}
+table {color: #000000; background-color: #e9e8e2; font-family: Consolas}
+.string {color: #ce7b00}
+.literal {color: #0000e6}
+.ST2 {color: #009900; font-family: Consolas; font-style: italic}
+.ST4 {font-family: Consolas; font-style: italic}
+.ST3 {font-family: Consolas; font-weight: bold; font-style: italic}
+.comment {color: #969696}
+.ST5 {color: #009900}
+.ST0 {color: #969696; font-family: Consolas; font-weight: bold}
+.ST1 {font-family: Consolas; font-weight: bold}
+-->
+</style>
+</head>
+<body>
+<table width="100%"><tr><td align="center">C:\Users\Daniel\Documents\NetBeansProjects\Google_Projects\src\google_projects\sortCollection.java</td></tr></table>
+<pre>
+  1 <span class="comment">/*</span>
+  2 <span class="comment"> * To change this license header, choose License Headers in Project Properties.</span>
+  3 <span class="comment"> * To change this template file, choose Tools | Templates</span>
+  4 <span class="comment"> * and open the template in the editor.</span>
+  5 <span class="comment"> */</span>
+  6 <span class="literal">package</span> google_projects;
+  7 
+  8 <span class="literal">import</span> java.util.ArrayList;
+  9 <span class="literal">import</span> java.util.Arrays;
+ 10 <span class="literal">import</span> java.util.List;
+ 11 <span class="literal">import</span> java.util.stream.Collectors;
+ 12 
+ 13 <span class="comment">/**</span>
+ 14 <span class="comment"> *</span>
+ 15 <span class="comment"> * </span><span class="ST0">@author</span> <span class="comment">Daniel</span>
+ 16  <span class="comment">*/</span>
+ 17 <span class="literal">public</span> <span class="literal">class</span> <span class="ST1">sortCollection</span> {
+ 18 
+ 19 <span class="comment">/**</span>
+ 20 <span class="comment"> *</span>
+ 21 <span class="comment"> * </span><span class="ST0">@author</span> <span class="comment">Daniel</span>
+ 22 <span class="comment"> * </span><span class="comment">General</span> <span class="comment">Links</span><span class="comment">:</span>
+ 23 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">stackabuse</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">sorting</span><span class="comment">-</span><span class="comment">algorithms</span><span class="comment">-</span><span class="comment">in</span><span class="comment">-</span><span class="comment">java</span><span class="comment">/</span>
+ 24 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">gist</span><span class="comment">.</span><span class="comment">github</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">djitz</span><span class="comment">/2152957</span>
+ 25 <span class="comment"> * </span><span class="comment">https</span><span class="comment">://</span><span class="comment">stackoverflow</span><span class="comment">.</span><span class="comment">com</span><span class="comment">/</span><span class="comment">questions</span><span class="comment">/8938375/</span><span class="comment">an</span><span class="comment">-</span><span class="comment">intuitive</span><span class="comment">-</span><span class="comment">understanding</span><span class="comment">-</span><span class="comment">of</span><span class="comment">-</span><span class="comment">heapsort</span>
+ 26  <span class="comment">*/</span>
+ 27     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST2">arr</span> = <span class="literal">new</span> <span class="literal">int</span>[100000], <span class="ST2">testArr</span>;
+ 28 
+ 29     
+ 30     <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">runFunction</span>(String mode){
+ 31         <span class="literal">switch</span>(mode){
+ 32             <span class="comment">/* n^2 Functions */</span>
+ 33             
+ 34             <span class="comment">//BubbleSort</span>
+ 35             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">BubbleSort</span><span class="string">&quot;</span>:
+ 36                 <span class="ST4">BubbleSort</span>(<span class="ST2">testArr</span>);
+ 37                 <span class="literal">break</span>;
+ 38                 
+ 39             <span class="comment">//InsertionSort    </span>
+ 40             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">InsertionSort</span><span class="string">&quot;</span>:
+ 41                 <span class="ST4">InsertionSort</span>(<span class="ST2">testArr</span>);
+ 42                 <span class="literal">break</span>;
+ 43             
+ 44             <span class="comment">//SelectionSort</span>
+ 45             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">SelectionSort</span><span class="string">&quot;</span>:
+ 46                 <span class="ST4">SelectionSort</span>(<span class="ST2">testArr</span>);
+ 47                 <span class="literal">break</span>;
+ 48                 
+ 49             <span class="comment">/* n Log(n) Functions */</span>
+ 50                 
+ 51             <span class="comment">//HeapSort</span>
+ 52             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">HeapSort</span><span class="string">&quot;</span>:
+ 53                 <span class="ST4">HeapSort</span>(<span class="ST2">testArr</span>);
+ 54                 <span class="literal">break</span>;
+ 55             
+ 56             <span class="comment">//MergeSort</span>
+ 57             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">MergeSort</span><span class="string">&quot;</span>:
+ 58                 <span class="ST4">MergeSort</span>(<span class="ST2">testArr</span>);
+ 59                 <span class="literal">break</span>;
+ 60 
+ 61             <span class="comment">//QuickSort</span>
+ 62             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">QuickSort</span><span class="string">&quot;</span>:
+ 63                 <span class="ST4">QuickSort</span>(<span class="ST2">testArr</span>);
+ 64                 <span class="literal">break</span>;
+ 65 
+ 66             <span class="comment">/* kn Functions */</span>
+ 67             
+ 68             <span class="comment">//RadixSort</span>
+ 69             <span class="literal">case</span> <span class="string">&quot;</span><span class="string">RadixSort</span><span class="string">&quot;</span>:
+ 70                 <span class="ST4">radixSort</span>(<span class="ST2">testArr</span>, 5); <span class="comment">//RADIX of 10</span>
+ 71                 <span class="literal">break</span>;
+ 72                 
+ 73         }
+ 74     }
+ 75     
+ 76     <span class="comment">/*--------------------------------------------------------------------------</span>
+ 77 <span class="comment">                            BEGIN O(n^2) Functions</span>
+ 78 <span class="comment">    ----------------------------------------------------------------------------*/</span>
+ 79     
+ 80     <span class="comment">//Bubble Sort switches elements in an array (one after the next) </span>
+ 81     <span class="comment">//Time Complexity: O(n^2)</span>
+ 82     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">BubbleSort</span>(<span class="literal">int</span>[] arr){
+ 83         <span class="literal">boolean</span> isSorted = <span class="literal">false</span>;
+ 84         <span class="literal">int</span> temp;
+ 85         <span class="literal">while</span>(!isSorted){
+ 86             isSorted = <span class="literal">true</span>;
+ 87             <span class="literal">for</span>(<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span> - 1; i ++){
+ 88                 <span class="literal">if</span>(arr[i] &gt; arr[i+1]){
+ 89                     isSorted = <span class="literal">false</span>;
+ 90                     temp = arr[i];
+ 91                     arr[i] = arr[i+1];
+ 92                     arr[i+1] = temp;
+ 93                 }
+ 94             }
+ 95         }
+ 96         <span class="literal">return</span> arr;
+ 97     }
+ 98     
+ 99     <span class="comment">//Insertion Sort moves the first unsorted element to it&#39;s place and then continues</span>
+100     <span class="comment">//Time Complexity: O(n^2)</span>
+101     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">InsertionSort</span>(<span class="literal">int</span>[] arr){
+102         <span class="literal">int</span> crnt, j;
+103         <span class="literal">for</span> (<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span>; i++){
+104             <span class="literal">if</span>((i &gt; 0) &amp;&amp; (arr[i] &lt; arr[i-1])){
+105                 crnt = arr[i];
+106                 j = i-1;
+107                 <span class="literal">while</span>((j &gt;= 0) &amp;&amp; (crnt &lt; arr[j])){
+108                     arr[j+1] = arr[j];
+109                     j--;
+110                 }
+111                 arr[j+1] = crnt;
+112             }
+113         }
+114         <span class="literal">return</span> arr;
+115     }
+116     
+117     <span class="comment">//Selection Sort itterates over the array filling each new position with the</span>
+118     <span class="comment">//lowest value from the remaining unsorted part</span>
+119     <span class="comment">//Time Complexity: O(n^2)</span>
+120     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">SelectionSort</span>(<span class="literal">int</span>[] arr){
+121         <span class="literal">int</span> min, minIndx, temp;
+122         <span class="literal">for</span>(<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span>; i++){
+123             temp = arr[i];
+124             min = arr[i];
+125             minIndx = i;
+126             <span class="literal">for</span>(<span class="literal">int</span> j = i+1; j &lt; arr.<span class="ST5">length</span>; j++){
+127                 <span class="literal">if</span>(arr[j] &lt; min){
+128                     min = arr[j];
+129                     minIndx = j;
+130                 }
+131             }
+132             arr[i] = min;
+133             arr[minIndx] = temp;
+134         }
+135         <span class="literal">return</span> arr;
+136     }
+137     
+138     <span class="comment">/*--------------------------------------------------------------------------</span>
+139 <span class="comment">                            BEGIN O(n Log(n)) Functions</span>
+140 <span class="comment">    ----------------------------------------------------------------------------*/</span>
+141     
+142     <span class="comment">//Heap Sort makes a complete binary tree and removes and rebalances the root</span>
+143     <span class="comment">//Time Complexity: O(n log(n))</span>
+144     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">HeapSort</span>(<span class="literal">int</span>[] arr){
+145         <span class="comment">//Heapify        </span>
+146         <span class="literal">int</span> root, tmp, indx, childIndx;
+147         <span class="literal">for</span>(<span class="literal">int</span> i = 1; i &lt; arr.<span class="ST5">length</span>; i++){
+148             indx = i;
+149             <span class="literal">while</span>(<span class="literal">true</span>){
+150                 root = (indx%2 == 0) ? (indx-2)/2 : (indx-1)/2;
+151                 <span class="literal">if</span>(arr[root] &lt; arr[indx]){
+152                     tmp = arr[root];
+153                     arr[root] = arr[indx];
+154                     arr[indx] = tmp;
+155                 }<span class="literal">else</span>{
+156                     <span class="literal">break</span>;
+157                 }
+158                 <span class="literal">if</span>(root == 0){
+159                     <span class="literal">break</span>;
+160                 }<span class="literal">else</span>{
+161                     indx = root;
+162                 }
+163             }
+164         }
+165         <span class="comment">//Sort</span>
+166         <span class="literal">for</span>(<span class="literal">int</span> j = arr.<span class="ST5">length</span> - 1; j &gt; 0; j--){
+167             <span class="comment">//Swap first and last</span>
+168             tmp = arr[0];
+169             arr[0] = arr[j];
+170             arr[j] = tmp;
+171             
+172             indx = 0;
+173             <span class="literal">while</span>(<span class="literal">true</span>){
+174                 <span class="literal">if</span>(((2*indx) + 1 &lt; j) &amp;&amp; (arr[indx] &lt; arr[(2*indx) + 1])){ <span class="comment">//Left Node is greater</span>
+175                     <span class="literal">if</span>(((2*indx) + 2 &lt; j) &amp;&amp; (arr[indx] &lt; arr[(2*indx) + 2])){ <span class="comment">//Right Node is too </span>
+176                         <span class="comment">//Get the larger child</span>
+177                         childIndx = (arr[(2*indx) + 1] &gt; arr[(2*indx) + 2]) ? (2*indx) + 1 : (2*indx) + 2;
+178                     }<span class="literal">else</span>{ 
+179                         childIndx = (2*indx) + 1;
+180                     }
+181                 }<span class="literal">else</span>{
+182                     <span class="literal">if</span>(((2*indx) + 2 &lt; j) &amp;&amp; (arr[indx] &lt; arr[(2*indx) + 2])){ <span class="comment">//Right Node </span>
+183                         childIndx = (2*indx) + 2;
+184                     }<span class="literal">else</span>{ 
+185                         <span class="literal">break</span>;
+186                     }
+187                 }
+188                 
+189                 tmp = arr[childIndx];
+190                 arr[childIndx] = arr[indx];
+191                 arr[indx] = tmp;
+192                 indx = childIndx;
+193             }
+194         }
+195         
+196         <span class="literal">return</span> arr;
+197     }    
+198     
+199     <span class="comment">//Merge Sort makes a copy of the array and takes the lowest of each grouping to resort into the origional array. </span>
+200     <span class="comment">//recursively it sorts larger chunks each time until the whole array is sorted</span>
+201     <span class="comment">//Time Complexity: O(n log(n)) ???</span>
+202     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">MergeSort</span>(<span class="literal">int</span>[] arr){
+203         <span class="literal">return</span> <span class="ST4">MergeSort</span>(arr, 1);
+204     }
+205     
+206     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">MergeSort</span>(<span class="literal">int</span>[] arr, <span class="literal">int</span> len){
+207         <span class="literal">int</span>[] mirrorArr = arr.clone();
+208         <span class="literal">int</span> a = 0,b = len, indx = 0, upperA, upperB;
+209         <span class="literal">while</span>(a &lt;= arr.<span class="ST5">length</span> - 1 &amp;&amp; b &lt;= arr.<span class="ST5">length</span> - 1){
+210             upperA = b;
+211             upperB = (b + len &lt; arr.<span class="ST5">length</span>) ? b + len : arr.<span class="ST5">length</span>;
+212             <span class="literal">while</span>((a &lt; upperA) || (b &lt; upperB)){ 
+213                 <span class="literal">if</span>(a == upperA){
+214                     arr[indx++] = mirrorArr[b++];
+215                 }<span class="literal">else</span>{
+216                     <span class="literal">if</span>((b == upperB) || (b &gt;= mirrorArr.<span class="ST5">length</span>)){
+217                         arr[indx++] = mirrorArr[a++];
+218                     }<span class="literal">else</span>{
+219                         <span class="literal">if</span>(mirrorArr[a] &lt; mirrorArr[b]){
+220                             arr[indx++] = mirrorArr[a++];
+221                         }<span class="literal">else</span>{
+222                             arr[indx++] = mirrorArr[b++];
+223                         }
+224                     }
+225                 }
+226             }
+227             a+= len;
+228             b+= len;
+229         }
+230         <span class="literal">return</span> (len &gt; arr.<span class="ST5">length</span>) ? arr : <span class="ST4">MergeSort</span>(arr, len*2);
+231     }
+232     
+233     <span class="comment">//Quick Sort picks a pivot and splits the list into two parts (high /low) recursively until sorted and then rejoins them [IMPROVE]</span>
+234     <span class="comment">//Time Complexity: O(n log(n))</span>
+235     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">QuickSort</span>(<span class="literal">int</span>[] arr){ <span class="literal">return</span> <span class="ST4">quicksort</span>( Arrays.<span class="ST4">stream</span>(arr).boxed().collect(Collectors.<span class="ST4">toList</span>())).stream().mapToInt(Integer::intValue).toArray(); }
+236     <span class="literal">static</span> List&lt;Integer&gt; <span class="ST3">quicksort</span>(List&lt;Integer&gt; input){
+237         <span class="literal">if</span>(input.size() &lt;= 1)
+238             <span class="literal">return</span> input;
+239         
+240         <span class="literal">int</span> pivot = (<span class="literal">int</span>) Math.<span class="ST4">ceil</span>(input.size()/2);
+241         
+242         List&lt;Integer&gt; low = <span class="literal">new</span> ArrayList&lt;&gt;();
+243         List&lt;Integer&gt; high = <span class="literal">new</span> ArrayList&lt;&gt;();
+244         
+245         <span class="literal">for</span>(<span class="literal">int</span> i = 0; i &lt; input.size(); i++){
+246             <span class="literal">if</span>(input.get(i) &lt;= input.get(pivot)){
+247                 <span class="literal">if</span>(i == pivot)
+248                     <span class="literal">continue</span>;
+249                 low.add(input.get(i));
+250             }<span class="literal">else</span>{
+251                 high.add(input.get(i));
+252             }
+253         }
+254         List&lt;Integer&gt; output = <span class="literal">new</span> ArrayList&lt;&gt;();
+255         
+256         output.addAll(<span class="ST4">quicksort</span>(low));
+257         output.add(input.get(pivot));
+258         output.addAll(<span class="ST4">quicksort</span>(high));
+259         
+260         <span class="literal">return</span> output;
+261     }
+262     
+263     <span class="comment">/*--------------------------------------------------------------------------</span>
+264 <span class="comment">                            BEGIN O(k+n) Functions</span>
+265 <span class="comment">    ----------------------------------------------------------------------------*/</span>
+266     
+267     <span class="comment">//CountSort counts the number of element in a range and then places the new positions (this can be improved)</span>
+268     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">countSort</span>(<span class="literal">int</span>[] arr)  
+269     { 
+270         <span class="literal">int</span> max = Arrays.<span class="ST4">stream</span>(arr).max().getAsInt(); 
+271         <span class="literal">int</span> min = Arrays.<span class="ST4">stream</span>(arr).min().getAsInt(); 
+272         <span class="literal">int</span> range = max - min + 1; 
+273         <span class="literal">int</span> count[] = <span class="literal">new</span> <span class="literal">int</span>[range]; 
+274         <span class="literal">int</span> output[] = <span class="literal">new</span> <span class="literal">int</span>[arr.<span class="ST5">length</span>]; 
+275         <span class="literal">for</span> (<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span>; i++){ 
+276             count[arr[i] - min]++; 
+277         } 
+278   
+279         <span class="literal">for</span> (<span class="literal">int</span> i = 1; i &lt; count.<span class="ST5">length</span>; i++){ 
+280             count[i] += count[i - 1]; 
+281         } 
+282   
+283         <span class="literal">for</span> (<span class="literal">int</span> i = arr.<span class="ST5">length</span> - 1; i &gt;= 0; i--){ 
+284             output[count[arr[i] - min] - 1] = arr[i]; 
+285             count[arr[i] - min]--; 
+286         } 
+287   
+288         <span class="literal">return</span> output;
+289     } 
+290     
+291     <span class="comment">//Similar to count sort except it prints out result faster</span>
+292     <span class="literal">static</span> <span class="literal">int</span>[] <span class="ST3">shortCountSort</span>(<span class="literal">int</span>[] arr)  
+293     { 
+294         <span class="literal">int</span> max = Arrays.<span class="ST4">stream</span>(arr).max().getAsInt(); 
+295         <span class="literal">int</span> min = Arrays.<span class="ST4">stream</span>(arr).min().getAsInt(); 
+296         <span class="literal">int</span> range = max - min + 1; 
+297         <span class="literal">int</span> count[] = <span class="literal">new</span> <span class="literal">int</span>[range]; 
+298         <span class="literal">int</span> output[] = <span class="literal">new</span> <span class="literal">int</span>[arr.<span class="ST5">length</span>]; 
+299         <span class="literal">int</span> indx = 0;
+300         <span class="literal">for</span> (<span class="literal">int</span> i = 0; i &lt; arr.<span class="ST5">length</span>; i++){ 
+301             count[arr[i] - min]++; 
+302         } 
+303   
+304         <span class="literal">for</span>(<span class="literal">int</span> i = 0; i&lt;range; i++){
+305             <span class="literal">for</span>(<span class="literal">int</span> j = 0; j &lt; count[i]; j++){
+306                 output[indx++] = i;
+307             }
+308         }
+309   
+310         <span class="literal">return</span> output;
+311     } 
+312     
+313     
+314     <span class="comment">// A utility function to get maximum value in arr[] </span>
+315     <span class="literal">static</span> <span class="literal">int</span> <span class="ST3">getMax</span>(<span class="literal">int</span> arr[], <span class="literal">int</span> n) 
+316     { 
+317         <span class="literal">int</span> mx = arr[0]; 
+318         <span class="literal">for</span> (<span class="literal">int</span> i = 1; i &lt; n; i++) 
+319             <span class="literal">if</span> (arr[i] &gt; mx) 
+320                 mx = arr[i]; 
+321         <span class="literal">return</span> mx; 
+322     } 
+323   
+324     <span class="comment">// A function to do counting sort of arr[] according to </span>
+325     <span class="comment">// the digit represented by exp. </span>
+326     <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">countSort</span>(<span class="literal">int</span> arr[], <span class="literal">int</span> n, <span class="literal">int</span> exp) 
+327     { 
+328         <span class="literal">int</span> output[] = <span class="literal">new</span> <span class="literal">int</span>[n]; <span class="comment">// output array </span>
+329         <span class="literal">int</span> i; 
+330         <span class="literal">int</span> count[] = <span class="literal">new</span> <span class="literal">int</span>[10]; 
+331         Arrays.<span class="ST4">fill</span>(count,0); 
+332   
+333         <span class="comment">// Store count of occurrences in count[] </span>
+334         <span class="literal">for</span> (i = 0; i &lt; n; i++) 
+335             count[ (arr[i]/exp)%10 ]++; 
+336   
+337         <span class="comment">// Change count[i] so that count[i] now contains </span>
+338         <span class="comment">// actual position of this digit in output[] </span>
+339         <span class="literal">for</span> (i = 1; i &lt; 10; i++) 
+340             count[i] += count[i - 1]; 
+341   
+342         <span class="comment">// Build the output array </span>
+343         <span class="literal">for</span> (i = n - 1; i &gt;= 0; i--) 
+344         { 
+345             output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
+346             count[ (arr[i]/exp)%10 ]--; 
+347         } 
+348   
+349         <span class="comment">// Copy the output array to arr[], so that arr[] now </span>
+350         <span class="comment">// contains sorted numbers according to curent digit </span>
+351         <span class="literal">for</span> (i = 0; i &lt; n; i++) 
+352             arr[i] = output[i]; 
+353     } 
+354   
+355     <span class="comment">// The main function to that sorts arr[] of size n using </span>
+356     <span class="comment">// Radix Sort </span>
+357     <span class="literal">static</span> <span class="literal">void</span> <span class="ST3">radixSort</span>(<span class="literal">int</span> arr[], <span class="literal">int</span> n) 
+358     { 
+359         <span class="comment">// Find the maximum number to know number of digits </span>
+360         <span class="literal">int</span> m = <span class="ST4">getMax</span>(arr, n);         
+361         <span class="comment">// Do counting sort for every digit. Instead of passing digit number, exp is passed. exp is 10^i where i is current digit number </span>
+362         <span class="literal">for</span> (<span class="literal">int</span> exp = 1; m/exp &gt; 0; exp *= 10) 
+363             <span class="ST4">countSort</span>(arr, n, exp); 
+364     } 
+365   
+366 }
+</pre></body>
+</html>
